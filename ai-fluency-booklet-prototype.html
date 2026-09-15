@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Before You Ask AI — a plain guide to what it is and isn't</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Karla:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#E7E8E0;
+  --raised:#F3F4EE;
+  --ink:#1C2B30;
+  --ink-soft:#5A6B70;
+  --petrol:#26555F;
+  --ochre:#8A5E1B;
+  --rule:#C9CCC0;
+  --rule-soft:#D8DAD1;
+
+  --serif:"Fraunces",Georgia,"Times New Roman",serif;
+  --sans:"Karla","Helvetica Neue",Arial,sans-serif;
+
+  --measure:66ch;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --paper:#141B1E;
+    --raised:#1B2428;
+    --ink:#E4E7E1;
+    --ink-soft:#9AA8AC;
+    --petrol:#7FB3BF;
+    --ochre:#D9A85C;
+    --rule:#2E3B40;
+    --rule-soft:#232E32;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#141B1E;
+  --raised:#1B2428;
+  --ink:#E4E7E1;
+  --ink-soft:#9AA8AC;
+  --petrol:#7FB3BF;
+  --ochre:#D9A85C;
+  --rule:#2E3B40;
+  --rule-soft:#232E32;
+}
+
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0;
+  background:var(--paper);
+  color:var(--ink);
+  font-family:var(--sans);
+  font-size:18px;
+  line-height:1.65;
+  font-feature-settings:"kern" 1;
+}
+img{max-width:100%}
+a{color:var(--petrol);text-decoration:none;border-bottom:1px solid currentColor}
+a:hover{color:var(--ink)}
+a:focus-visible,button:focus-visible{outline:2px solid var(--petrol);outline-offset:3px}
+
+/* ---------- masthead ---------- */
+.masthead{
+  max-width:1180px;margin:0 auto;padding:48px 32px 0;
+}
+.masthead h1{
+  font-family:var(--serif);
+  font-weight:500;
+  font-size:clamp(2rem,4.4vw,3.15rem);
+  line-height:1.08;
+  letter-spacing:-0.018em;
+  margin:0 0 14px;
+  max-width:19ch;
+}
+.standfirst{
+  font-size:1.06rem;color:var(--ink-soft);margin:0;max-width:56ch;
+}
+
+/* ---------- hero ---------- */
+.hero{
+  max-width:1180px;margin:0 auto;padding:40px 32px 52px;
+}
+.hero-frame{
+  background:var(--raised);
+  border:1px solid var(--rule);
+  padding:34px 34px 30px;
+}
+.hero svg{display:block;width:100%;height:auto}
+.hero-caption{
+  margin:26px 0 0;
+  font-family:var(--serif);
+  font-size:1.16rem;
+  line-height:1.5;
+  max-width:58ch;
+}
+.nesting-list{display:none;margin:0;padding:0;list-style:none}
+.nesting-list li{
+  font-size:.95rem;
+  padding:9px 0 9px 14px;
+  border-left:2px solid var(--rule);
+  margin-left:0;
+}
+.nesting-list li span{display:block;color:var(--ink-soft);font-size:.82rem}
+.nesting-list li.core{border-left-color:var(--petrol);color:var(--petrol);font-weight:700}
+
+/* ---------- layout ---------- */
+.layout{
+  max-width:1180px;margin:0 auto;padding:0 32px 90px;
+  display:grid;grid-template-columns:238px 1fr;gap:64px;align-items:start;
+}
+.contents{position:sticky;top:34px}
+.contents h2{
+  font-family:var(--sans);font-size:.8rem;font-weight:700;
+  letter-spacing:.04em;margin:0 0 14px;color:var(--ink-soft);
+}
+.contents ol{list-style:none;margin:0;padding:0}
+.contents li{margin:0 0 3px}
+.contents a{
+  display:block;padding:5px 0 5px 12px;border-bottom:0;
+  border-left:2px solid var(--rule-soft);
+  font-size:.88rem;line-height:1.35;color:var(--ink-soft);
+}
+.contents a:hover{color:var(--ink);border-left-color:var(--rule)}
+.contents a.active{color:var(--ink);border-left-color:var(--petrol);font-weight:500}
+.contents .sub a{padding-left:24px;font-size:.83rem}
+.contents .group{
+  margin:20px 0 6px;font-size:.76rem;color:var(--ink-soft);
+  letter-spacing:.03em;padding-left:12px;
+}
+.contents .dim a{opacity:.42;pointer-events:none;font-style:italic}
+
+/* ---------- pages ---------- */
+.page{
+  padding:0 0 62px;margin:0 0 62px;border-bottom:1px solid var(--rule);
+  scroll-margin-top:28px;
+}
+.page:last-of-type{border-bottom:0}
+.page-num{
+  font-family:var(--serif);font-size:.95rem;color:var(--ink-soft);
+  display:block;margin:0 0 6px;
+}
+.page h2{
+  font-family:var(--serif);font-weight:500;
+  font-size:clamp(1.55rem,2.8vw,2.1rem);
+  line-height:1.16;letter-spacing:-0.012em;
+  margin:0 0 22px;max-width:24ch;
+}
+.page h3{
+  font-family:var(--serif);font-weight:500;font-size:1.32rem;
+  line-height:1.25;margin:44px 0 16px;max-width:30ch;
+}
+.page p{margin:0 0 19px;max-width:var(--measure)}
+.lede{font-size:1.1rem;line-height:1.58;max-width:60ch}
+
+.depth-tag{
+  display:inline-block;font-size:.76rem;color:var(--ochre);
+  border:1px solid currentColor;padding:2px 9px;margin:0 0 14px;
+}
+
+/* callouts */
+.restate{
+  background:var(--raised);
+  border-left:3px solid var(--ochre);
+  padding:20px 24px;margin:26px 0;max-width:var(--measure);
+}
+.restate p{margin:0 0 13px}
+.restate p:last-child{margin:0}
+.restate .tag{
+  font-family:var(--serif);font-size:.95rem;color:var(--ochre);
+  display:block;margin:0 0 9px;
+}
+.grounding{
+  border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);
+  padding:17px 0;margin:26px 0;max-width:var(--measure);
+}
+.grounding .tag{
+  font-family:var(--serif);font-size:.95rem;color:var(--ink-soft);
+  display:block;margin:0 0 7px;
+}
+.grounding p{margin:0}
+
+/* figure slots */
+.figure-slot{
+  border:1px dashed var(--rule);background:var(--raised);
+  padding:26px 24px;margin:28px 0;max-width:var(--measure);
+}
+.figure-slot .slot-label{
+  font-size:.86rem;color:var(--ink-soft);margin:0 0 7px;
+}
+.figure-slot .slot-src{font-size:.82rem;margin:0;word-break:break-word}
+
+/* sources */
+.sources{
+  margin:40px 0 0;padding:17px 0 0;border-top:1px solid var(--rule);
+  max-width:var(--measure);
+}
+.sources h4{
+  font-family:var(--sans);font-size:.8rem;font-weight:700;
+  margin:0 0 8px;color:var(--ink-soft);letter-spacing:.03em;
+}
+.sources ul{margin:0;padding:0;list-style:none}
+.sources li{font-size:.85rem;margin:0 0 5px;word-break:break-word}
+
+/* carries-into */
+.carries{
+  margin:26px 0 0;font-size:.9rem;color:var(--ink-soft);
+  max-width:var(--measure);
+}
+.carries strong{font-weight:500;color:var(--ink)}
+
+/* placeholder marker */
+.placeholder-note{
+  border-left:3px solid var(--rule);padding:12px 18px;margin:0 0 26px;
+  font-size:.86rem;color:var(--ink-soft);max-width:var(--measure);
+}
+
+/* forthcoming */
+.forthcoming{opacity:.55}
+.forthcoming h2{margin-bottom:14px}
+.forthcoming ul{margin:0;padding:0 0 0 18px;max-width:var(--measure)}
+.forthcoming li{margin:0 0 7px;font-size:.93rem}
+
+footer{
+  max-width:1180px;margin:0 auto;padding:0 32px 70px;
+  font-size:.85rem;color:var(--ink-soft);
+}
+footer p{max-width:var(--measure);margin:0 0 8px}
+
+/* ---------- motion ---------- */
+.ring,.ring-label,.core-block,.core-label{opacity:0}
+.drawn .ring,.drawn .ring-label,.drawn .core-block,.drawn .core-label{
+  animation:settle .58s cubic-bezier(.22,.61,.36,1) forwards;
+}
+@keyframes settle{from{opacity:0;transform:scale(.988)}to{opacity:1;transform:scale(1)}}
+svg g{transform-origin:center;transform-box:fill-box}
+@media (prefers-reduced-motion:reduce){
+  .ring,.ring-label,.core-block,.core-label{opacity:1}
+  .drawn .ring,.drawn .ring-label,.drawn .core-block,.drawn .core-label{animation:none}
+}
+
+/* ---------- responsive ---------- */
+@media (max-width:940px){
+  .layout{grid-template-columns:1fr;gap:34px}
+  .contents{position:static;border-bottom:1px solid var(--rule);padding-bottom:24px}
+  .masthead,.hero,.layout,footer{padding-left:22px;padding-right:22px}
+  .hero-frame{padding:22px}
+  .hero svg{display:none}
+  .nesting-list{display:block}
+  body{font-size:17px}
+}
+</style>
+</head>
+<body>
+
+<header class="masthead">
+  <h1>Before you ask AI, know what you're asking</h1>
+  <p class="standfirst">A plain guide to what these tools are, why they behave the way they do, and where your judgement still has to do the work.</p>
+</header>
+
+<section class="hero">
+  <div class="hero-frame">
+    <svg viewBox="0 0 760 440" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Five nested frames: artificial intelligence contains machine learning, which contains deep learning, which contains generative AI, which contains large language models. At the centre sits the chat window most people actually use.">
+      <g class="ring-g">
+        <rect class="ring" x="6" y="6" width="748" height="428" fill="none" stroke="var(--rule)" stroke-width="1"/>
+        <text class="ring-label" x="24" y="32" font-family="Karla, sans-serif" font-size="13" fill="var(--ink-soft)">Artificial intelligence</text>
+
+        <rect class="ring" x="46" y="44" width="668" height="352" fill="none" stroke="var(--rule)" stroke-width="1"/>
+        <text class="ring-label" x="64" y="70" font-family="Karla, sans-serif" font-size="13" fill="var(--ink-soft)">Machine learning</text>
+
+        <rect class="ring" x="86" y="82" width="588" height="276" fill="none" stroke="var(--rule)" stroke-width="1.2"/>
+        <text class="ring-label" x="104" y="108" font-family="Karla, sans-serif" font-size="13" fill="var(--ink-soft)">Deep learning</text>
+
+        <rect class="ring" x="126" y="120" width="508" height="200" fill="none" stroke="var(--petrol)" stroke-width="1.2" opacity=".55"/>
+        <text class="ring-label" x="144" y="146" font-family="Karla, sans-serif" font-size="13" fill="var(--ink)">Generative AI</text>
+
+        <rect class="ring" x="166" y="158" width="428" height="124" fill="none" stroke="var(--petrol)" stroke-width="1.6"/>
+        <text class="ring-label" x="184" y="184" font-family="Karla, sans-serif" font-size="13" fill="var(--ink)">Large language models</text>
+
+        <rect class="core-block" x="206" y="196" width="348" height="48" fill="var(--petrol)"/>
+        <text class="core-label" x="380" y="225" text-anchor="middle" font-family="Karla, sans-serif" font-size="14" font-weight="700" fill="var(--raised)">The chat window you actually use</text>
+      </g>
+    </svg>
+
+    <ul class="nesting-list">
+      <li>Artificial intelligence <span>the whole field, seventy years old</span></li>
+      <li>Machine learning <span>systems that learn patterns from data</span></li>
+      <li>Deep learning <span>layered neural networks</span></li>
+      <li>Generative AI <span>models that produce new content</span></li>
+      <li>Large language models <span>trained on text</span></li>
+      <li class="core">The chat window you actually use</li>
+    </ul>
+
+    <p class="hero-caption">Everything in the news is called "AI." What you have open in a browser tab is the innermost box — one application, of one method, inside a field that has been running since the 1950s.</p>
+  </div>
+</section>
+
+<main class="layout">
+
+  <nav class="contents" aria-label="Contents">
+    <h2>Contents</h2>
+    <ol>
+      <li><a href="#p1">What is this, and how do I use it?</a></li>
+      <li class="group">Sizing the tool</li>
+      <li><a href="#p2">Is "AI" one thing, or many different things?</a></li>
+      <li class="sub"><a href="#p21">The history of artificial intelligence</a></li>
+      <li class="group">Still to come</li>
+      <li class="dim"><a href="#">How it actually works</a></li>
+      <li class="dim"><a href="#">Judgment and governance</a></li>
+      <li class="dim"><a href="#">Glossary</a></li>
+    </ol>
+  </nav>
+
+  <div class="pages">
+
+    <!-- ============ PAGE 1 ============ -->
+    <article class="page" id="p1">
+      <span class="page-num">One</span>
+      <h2>What is this, and how do I use it?</h2>
+
+      <p class="placeholder-note">Placeholder copy, written to show the page shape only. Not yours, not final.</p>
+
+      <p class="lede">This is a short reference booklet about the AI tools you already have access to. It is not a tutorial, and it will not teach you to write better prompts. It explains what these tools are and why they behave the way they do, so that you can judge for yourself what to hand over and what to keep.</p>
+
+      <p>Every page is a question someone actually asks, followed by a direct answer. You do not need to read them in order, though the early pages make the later ones easier. Pages marked as optional go one level deeper than most readers will need.</p>
+
+      <div class="grounding">
+        <span class="tag">Who this is for</span>
+        <p>Anyone using these tools for real work without a technical background: managers, consultants, public officials, teachers, small-business owners.</p>
+      </div>
+
+      <p class="carries"><strong>Carries into:</strong> everything that follows.</p>
+    </article>
+
+    <!-- ============ PAGE 2 ============ -->
+    <article class="page" id="p2">
+      <span class="page-num">Two</span>
+      <h2>Is "AI" one thing, or many different things?</h2>
+
+      <h3>What is artificial intelligence (AI)?</h3>
+      <p class="lede">Artificial intelligence can be thought of as computerized systems that can act in ways that commonly require human intelligence, such as the ability to learn, solve problems, and achieve goals under varying conditions. While artificial intelligence has become an every-day term since the release of 'ChatGPT,' research on computerized machines behaving like human intelligence has been ongoing since 1950s. A history of artificial intelligence is elaborated later, but most artificial intelligence we interface with in today's world stems from research beginning 2010s.</p>
+
+      <h3>Is artificial intelligence one solution to all problems?</h3>
+      <p>Artificial intelligence is not one thing: it is a general term of identification, referring to methods of data-based outcome generation and has several application areas from summarising information to facial recognition.</p>
+
+      <div class="grounding">
+        <span class="tag">How you already meet it</span>
+        <p>It is important to understand that artificial intelligence, by itself is not a "thing," but instead alludes to the process of human-like intelligence displays. It is also important to understand how individuals like us interact with artificial intelligence. It is via products (things) like Microsoft CoPilot and features like Siri on your phone and Alexa on your television.</p>
+      </div>
+
+      <h3>Where do machine learning, deep learning and generative AI fit in?</h3>
+      <p>Several other terms, like machine learning, deep learning, neural networks, generative AI and large language models are well-known. These are parts and types of what we call AI. The following diagram explains the artificial intelligence ecosystem.</p>
+
+      <div class="figure-slot">
+        <p class="slot-label">Diagram slot — AI taxonomy infographic</p>
+        <p class="slot-src"><a href="https://www.congress.gov/crs-product/IG10077">congress.gov/crs-product/IG10077</a></p>
+      </div>
+
+      <p>Machine learning (ML) is a type of AI where systems predict new patterns from ingesting historical data (old patterns) to make decisions without being explicitly programmed for every rule. These systems are built computer programs that improve on their own previous performances, learning through experience. These are distinctly advanced over explicit rules-based computer programs like email spam filters you set up.</p>
+
+      <div class="grounding">
+        <span class="tag">How you already meet it</span>
+        <p>An everyday individual interfaces with machine learning via their weather app and the prediction of rain, or via YouTube and its recommended videos. The photos app that classifies your nephew's picture as your nephew is also possible by computer vision, a branch of ML.</p>
+      </div>
+
+      <p>Deep learning (DL) is an ML approach using multi-layered artificial neural networks to automatically learn complex patterns from large amounts of data. These neural networks are called so because they mimic the human brain's neuron structure. It is one of the most powerful approaches to building AI systems.</p>
+
+      <div class="figure-slot">
+        <p class="slot-label">Diagram slot — machine learning compared with deep learning</p>
+        <p class="slot-src"><a href="https://www.databricks.com/blog/machine-learning-vs-deep-learning">databricks.com/blog/machine-learning-vs-deep-learning</a></p>
+      </div>
+
+      <p>DL, as a type of ML approach has very different data requirements. ML works well with small to medium structured datasets, but performance depends on feature quality. Features are essentially the most relevant and important columns of the data based on the question. DL meanwhile, depends on large amounts of unstructured data (images, text, audio) and the scale of data directly impacts performance since DL performs automatic feature identification with minimal human intervention. Traditional ML models can run on standard CPUs with lower memory, while DL requires GPUs or TPUs with high memory for efficient training, so infrastructure costs will be higher with DL.</p>
+
+      <div class="restate">
+        <span class="tag">Very simply put</span>
+        <p>Traditional programming was about entering rules and data into computer systems for output answers.</p>
+        <p>In ML, you provide the system with rules, old data, and features. The system identified the rules on its own. Then, when you input new data, it uses these identified rules to output answers.</p>
+        <p>In DL, you give the system old data and the answers only. It identifies what features of the data are important and the rules by itself. It uses this to output answers for new data inputs.</p>
+      </div>
+
+      <p>GenAI refers to ML models developed through training on large volumes of data in order to generate content. ChatGPT is an AI chatbot from a company called OpenAI, underpinned by a type of AI called a large language model (LLM). LLMs are trained on massive amounts of data, largely collected from public internet sites. When a user provides a prompt, usually a text prompt, the model can generate words or paragraphs with human-like quality. Other models can create different types of outputs from text prompts, such as images, music, videos, and computer code.</p>
+
+      <p>Modern technological systems aren't however made of just one type of artificial intelligence. Take video or movie streaming for example: deep learning algorithms find the right movies to suggest to you based on all user habits, characteristics and data, but machine learning algorithms rank them on your screen based on your personal past preferences.</p>
+
+      <div class="sources">
+        <h4>Sources</h4>
+        <ul>
+          <li><a href="https://www.congress.gov/crs-product/IG10077">CRS — Artificial Intelligence (AI) Taxonomy</a></li>
+          <li><a href="https://www.congress.gov/crs-product/R47644">CRS R47644 — Artificial Intelligence: Overview, Recent Advances, and Considerations for the 118th Congress</a></li>
+          <li><a href="https://www.databricks.com/blog/machine-learning-vs-deep-learning">Databricks — Machine learning vs deep learning</a></li>
+        </ul>
+      </div>
+
+      <p class="carries"><strong>Carries into:</strong> the rules-discovered-from-data idea is what the next part builds on to explain why these tools complete patterns rather than check facts.</p>
+    </article>
+
+    <!-- ============ PAGE 2.1 ============ -->
+    <article class="page" id="p21">
+      <span class="page-num">Two, continued</span>
+      <span class="depth-tag">Optional depth</span>
+      <h2>The history of artificial intelligence</h2>
+
+      <p class="lede">No single discovery or engineering event are determined as the "beginning of AI," but several events have shaped developments along the way to today's ChatGPT, Claude or Gemini.</p>
+
+      <p>Alan Turing generally is credited with the origin of the concept when he speculated in 1950 about "thinking machines" that could reason at the level of a human being. His well-known "Turing Test" specifies that computers need to complete reasoning puzzles as well as humans in order to be considered "thinking" in an autonomous manner.</p>
+
+      <p>In 1956, Alan Newell and Herbert Simon of Carnegie Mellon University unveiled what they called "Logic Theorist" at a workshop in Dartmouth. This algorithm solved tough mathematical equations on their own. The term "artificial intelligence" was also coined in 1956 by computer scientist John McCarthy for a workshop at Dartmouth. McCarthy went on to co-establish MIT's and later Stanford's AI laboratories.</p>
+
+      <p>Since that time, the field of AI has gone through what some have termed summers and winters: periods of much research and advancement followed by lulls in activity and progress. The reasons for the AI winters have included a focus on theory over practical applications, research problems being more difficult than anticipated, and limitations of the technologies of the time. Much of the current progress and research in AI, which began around 2010, has been attributed to the availability of large datasets (i.e., big data), improved ML approaches and algorithms, and more powerful computers.</p>
+
+      <div class="sources">
+        <h4>Sources</h4>
+        <ul>
+          <li><a href="https://www.congress.gov/crs-product/R47644">CRS R47644 — Artificial Intelligence: Overview, Recent Advances, and Considerations for the 118th Congress</a></li>
+          <li><a href="https://www.brookings.edu/articles/what-is-artificial-intelligence/">Brookings — What is artificial intelligence?</a></li>
+        </ul>
+      </div>
+
+      <p class="carries"><strong>Carries into:</strong> knowing this is seventy years of cumulative work is what stops the limitations in the next part from reading as bugs awaiting a fix.</p>
+    </article>
+
+    <!-- ============ FORTHCOMING ============ -->
+    <article class="page forthcoming">
+      <span class="page-num">Still to come</span>
+      <h2>How it actually works, and what to do about it</h2>
+      <ul>
+        <li>Does my use make it better?</li>
+        <li>If it sounds confident, is it true?</li>
+        <li>Does it remember everything we've talked about?</li>
+        <li>If my instructions are clear, will it follow them?</li>
+        <li>Does it know everything, including recent events?</li>
+        <li>Is what I type in private?</li>
+        <li>Can AI just do this hard task?</li>
+        <li>Once we adopt it, do we still need oversight?</li>
+        <li>Can it tell cause from correlation?</li>
+      </ul>
+    </article>
+
+  </div>
+</main>
+
+<footer>
+  <p>Design prototype. Part two is reproduced exactly as drafted, including the three corrections still outstanding.</p>
+</footer>
+
+<script>
+(function(){
+  var frame = document.querySelector('.hero-frame');
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(!reduce && frame){
+    var bits = frame.querySelectorAll('.ring,.ring-label,.core-block,.core-label');
+    bits.forEach(function(el,i){ el.style.animationDelay = (i*52)+'ms'; });
+    requestAnimationFrame(function(){ frame.classList.add('drawn'); });
+  }
+
+  var links = Array.prototype.slice.call(document.querySelectorAll('.contents a[href^="#p"]'));
+  var targets = links.map(function(a){ return document.querySelector(a.getAttribute('href')); }).filter(Boolean);
+  if('IntersectionObserver' in window && targets.length){
+    var obs = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if(!e.isIntersecting) return;
+        links.forEach(function(a){ a.classList.remove('active'); });
+        var match = links.filter(function(a){ return a.getAttribute('href') === '#'+e.target.id; })[0];
+        if(match) match.classList.add('active');
+      });
+    },{rootMargin:'-15% 0px -70% 0px'});
+    targets.forEach(function(t){ obs.observe(t); });
+  }
+})();
+</script>
+</body>
+</html>
